@@ -15,7 +15,7 @@ _Prerequisite_: you have [Hammerspoon](https://www.hammerspoon.org) installed.
 Download [BrewAutoUpdate.spoon.zip](https://github.com/obecker/brew-auto-update-spoon/releases/download/v1.0.0/BrewAutoUpdate.spoon.zip) and double-click the extracted `BrewAutoUpdate.spoon` folder. 
 Hammerspoon should automatically move it into your `$HOME/.hammerspoon/Spoons/` folder.
 
-Add these lines to your `$HOME/.hammerspoon/init.lua` file:
+Add this line to your `$HOME/.hammerspoon/init.lua` file:
 ```lua
 hs.loadSpoon("BrewAutoUpdate"):start()
 ```
