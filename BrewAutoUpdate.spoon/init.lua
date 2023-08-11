@@ -21,7 +21,7 @@ obj.__index = obj
 
 -- Metadata
 obj.name = "BrewAutoUpdate"
-obj.version = "1.0.0"
+obj.version = "1.1.0"
 obj.author = "Oliver Becker <ob@obqo.de>"
 obj.homepage = "https://github.com/obecker/brew-auto-update-spoon"
 obj.license = "Apache License 2.0"
