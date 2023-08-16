@@ -11,7 +11,7 @@
 --- ```
 --- hs.loadSpoon("BrewAutoUpdate")
 --- spoon.BrewAutoUpdate.brewBinary = "/path/to/your/brew"
---- spoon.BrewAutoUpdate.updateInterval = "1d"
+--- spoon.BrewAutoUpdate.updateInterval = "8h"
 --- spoon.BrewAutoUpdate.alertSeconds = 5
 --- spoon.BrewAutoUpdate:start()
 --- ```
@@ -33,8 +33,11 @@ obj.brewBinary = nil
 
 --- BrewAutoUpdate.updateInterval
 --- Variable
---- Interval for running `brew update`. Default is one day. See `repeatInterval` of [hs.timer.doAt](https://www.hammerspoon.org/docs/hs.timer.html#doAt) for allowed values.
-obj.updateInterval = "1d"
+--- Interval for running `brew update`. Default is 8 hours. See `repeatInterval` of [hs.timer.doAt](https://www.hammerspoon.org/docs/hs.timer.html#doAt) for allowed values.
+--- Note: it seems this interval is paused when macOS goes to sleep mode. I.e. if after booting you are working for 6 hours,
+--- and let the Mac sleep for some time, then the next update happens 2 hours after wake-up, no matter how long the sleep period was.
+--- That's why 8h is sensible default (instead of 1d for one day).
+obj.updateInterval = "8h"
 
 --- BrewAutoUpdate.alertSeconds
 --- Variable
@@ -104,7 +107,9 @@ function obj:start()
             if (infoAlertCloseTimer) then
                 infoAlertCloseTimer:fire()
             else
-                infoAlertId = hs.alert.show(notification:informativeText(), "infinity") -- closed by the timer below
+                infoAlertId = hs.alert.show(notification:informativeText(), {
+                    radius = 9
+                }, "infinity") -- closed by the timer below
                 infoAlertCloseTimer = hs.timer.doAfter(obj.alertSeconds, function()
                     hs.alert.closeSpecific(infoAlertId)
                     infoAlertId = nil

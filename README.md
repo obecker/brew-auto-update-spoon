@@ -4,7 +4,7 @@
 [Hammerspoon](https://www.hammerspoon.org) plugin (a.k.a. [Spoon](https://www.hammerspoon.org/go/#spoonsintro)) 
 for running `brew update` automatically.
 
-The plugin executes `brew update` at Hammerspoon's startup and then repeatedly every day (or some other defined interval).
+The plugin executes `brew update` at Hammerspoon's startup and then repeatedly every 8 hours (or some other defined interval).
 If there are outdated packages (determined by executing `brew outdated`) it will display a notification with a button
 to run `brew upgrade` in a Terminal.
 
@@ -26,7 +26,7 @@ Add this line to your `$HOME/.hammerspoon/init.lua` file:
 hs.loadSpoon("BrewAutoUpdate"):start()
 ```
 
-The plugin will auto-detect your `brew` binary and uses by default an update interval of 24 hours and a duration of 
+The plugin will auto-detect your `brew` binary and uses by default an update interval of 8 hours and a duration of 
 5 seconds for displaying the additional information alert.
 You may overwrite these settings with
 ```lua
