@@ -1,0 +1,30 @@
+name: Releases
+
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      ARTIFACT: 'BrewAutoUpdate.spoon.zip'
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      uses: thedoctor0/zip-release@0.7.1
+      with:
+        filename: ${{env.ARTIFACT}}
+        path: 'BrewAutoUpdate.spoon'
+    - name: Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: ${{env.ARTIFACT}}
+        draft: true
+        artifactErrorsFailBuild: true
+        allowUpdates: true
+        updateOnlyUnreleased: true
+        replacesArtifacts: true
