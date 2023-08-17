@@ -15,6 +15,14 @@
 --- spoon.BrewAutoUpdate.alertSeconds = 5
 --- spoon.BrewAutoUpdate:start()
 --- ```
+--- or using the `config()` function
+--- ```
+--- hs.loadSpoon("BrewAutoUpdate"):config({
+---     brewBinary = "/path/to/your/brew",
+--      updateInterval = "8h",
+--      alertSeconds = 5
+--- }):start()
+--- ```
 
 local obj = {}
 obj.__index = obj
@@ -90,6 +98,28 @@ function obj:init()
     end
     brewNotificationImage = hs.image.imageFromPath(hs.spoons.resourcePath("images/homebrew.png"))
     initialized = true
+end
+
+--- BrewAutoUpdate.config(params)
+--- Method
+--- Convenience function to set configuration variables of `BrewAutoUpdate`, namely `brewBinary`, `updateInterval`,
+--- and `alertSeconds`
+---
+--- Parameters:
+---  * params - table of configuration variables, e.g. `{ updateInterval = "6h" }`
+---
+--- Returns:
+---  * self
+function obj:config(params)
+    params = params or {}
+    if type(params) == "table" then
+        for key, val in pairs(params) do
+            obj[key] = val
+        end
+    else
+        error("Illegal argument passed to config(): " .. type(params))
+    end
+    return obj
 end
 
 --- BrewAutoUpdate.start()

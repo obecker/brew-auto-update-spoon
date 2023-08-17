@@ -30,9 +30,9 @@ The plugin will auto-detect your `brew` binary and uses by default an update int
 5 seconds for displaying the additional information alert.
 You may overwrite these settings with
 ```lua
-local brewAutoUpdate = hs.loadSpoon("BrewAutoUpdate")
-brewAutoUpdate.brewBinary = "/path/to/your/brew"
-brewAutoUpdate.updateInterval = "6h" -- check for updates every 6 hours
-brewAutoUpdate.alertSeconds = 3 -- close the info alert after 3 seconds
-brewAutoUpdate:start()
+hs.loadSpoon("BrewAutoUpdate"):config({
+    brewBinary = "/path/to/your/brew",
+    updateInterval = "6h", -- check for updates every 6 hours
+    alertSeconds = 3 -- close the info alert after 3 seconds
+}):start()
 ```
